@@ -24,5 +24,12 @@ return [
 
             ],
         ],
+        [
+            'class' => \Port\Monitor::class,
+            'listen' => 'tcp://127.0.0.1:9889',
+            'options' => [
+
+            ],
+        ],
     ],
 ];

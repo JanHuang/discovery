@@ -25,7 +25,7 @@ class MultiPort extends TCP
      */
     public function doWork(swoole_server $server, $fd, $data, $from_id)
     {
-        $json = Json::decode($data);
+        $json = json_decode($data, true);
 
         $json['host'] = ip2long($json['host']);
 
@@ -34,7 +34,7 @@ class MultiPort extends TCP
         if (!$row) {
             database()->insert('services', $json);
         } else {
-            database()->update('service', $json, [
+            database()->update('services', $json, [
                 'AND' => [
                     'host' => $json['host'],
                     'service' => $json['service']
@@ -42,6 +42,6 @@ class MultiPort extends TCP
             ]);
         }
 
-        return 'hello tcp';
+        return 'ok';
     }
 }
