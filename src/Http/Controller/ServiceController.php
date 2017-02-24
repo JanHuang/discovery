@@ -18,7 +18,9 @@ class ServiceController
     {
         $services = database()->select('services', '*');
 
-        return json($services);
+        return json([
+            'nodes' => $services
+        ]);
     }
 
     public function monitor()
@@ -30,13 +32,20 @@ class ServiceController
         $nodes = [];
         $edges = [];
         foreach ($services as $index => $service) {
-            $source = $service['service'] . long2ip($service['source']);
-            $target = $service['service'] . long2ip($service['target']);
-            $nodes[] = [
+            $source = $service['service'] . ':' . long2ip($service['source']);
+            $target = $service['service'] . ':' . long2ip($service['target']);
+
+            $nodes[$service['source']] = [
                 'id' => $source,
                 'x' => 10 * $index,
                 'y' => 10 * $index,
             ];
+            $nodes[$service['target']] = [
+                'id' => $target,
+                'x' => 20 * $index,
+                'y' => 20 * $index,
+            ];
+
             $edges[] = [
                 'source' => $source,
                 'target' => $target,

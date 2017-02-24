@@ -31,18 +31,12 @@ class Monitor extends Tcp
 
         $row = database()->query('select * from monitor where target = ' . $json['target'] . ' and source = \'' . $json['source'] . '\'')->fetch(\PDO::FETCH_ASSOC);
 
+        unset($json['host']);
+
         if (!$row) {
-            database()->insert('monitor', [
-                'target' => $json['target'],
-                'source' => $json['source'],
-                'cmd' => $json['cmd']
-            ]);
+            database()->insert('monitor', $json);
         } else {
-            database()->update('monitor', [
-                'target' => $json['target'],
-                'source' => $json['source'],
-                'cmd' => $json['cmd']
-            ], [
+            database()->update('monitor', $json, [
                 'AND' => [
                     'source' => $json['source'],
                     'target' => $json['target']

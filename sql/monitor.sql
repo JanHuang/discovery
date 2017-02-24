@@ -1,5 +1,5 @@
 CREATE TABLE `monitor` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `service` varchar(64) DEFAULT NULL,
   `pid` int(11) DEFAULT NULL,
   `sock` varchar(10) DEFAULT NULL,
