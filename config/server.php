@@ -13,22 +13,18 @@ return [
         'pid_file' => '',
         'worker_num' => 10
     ],
-    'processes' => [
-//        \Processor\ServerProcessor::class
-    ],
     'ports' => [
         [
-            'class' => \Port\MultiPort::class,
+            'class' => \Server\Discovery::class,
             'listen' => 'tcp://127.0.0.1:9888',
             'options' => [
 
             ],
         ],
         [
-            'class' => \Port\Monitor::class,
+            'class' => \Server\Monitor::class,
             'listen' => 'tcp://127.0.0.1:9889',
             'options' => [
-
             ],
         ],
     ],

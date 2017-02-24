@@ -7,14 +7,13 @@
  * @link      http://www.fast-d.cn/
  */
 
-namespace Port;
+namespace Server;
 
 
-use FastD\Packet\Json;
 use FastD\Swoole\Server\Tcp as TCP;
 use swoole_server;
 
-class MultiPort extends TCP
+class Discovery extends TCP
 {
     /**
      * @param swoole_server $server
